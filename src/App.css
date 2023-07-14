@@ -1,0 +1,20 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+input:invalid[focused = "true"] {
+    border: 1px solid red;
+  }
+  input:valid[focused = "true"] {
+    border: 1px solid green;
+  }
+  
+  input:invalid[focused = "true"] ~ .errorMessage{
+    display: block;
+  }
+  .errorMessage{
+    color: red;
+    display: none;
+  }
