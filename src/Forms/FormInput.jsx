@@ -28,13 +28,14 @@ const FormInput = (props) => {
         {/* Added position absolute and left positioning */}
         <input
           style={{
-            padding: "10px 40px",
-            background: "#E9E9E9",
+            padding: "10px 30px",
             borderRadius: "50px",
             margin: "10px",
             outline: "none",
             border: "none",
-
+            background: "linear-gradient(145deg, #E9E9E9, #ffff);",
+            boxShadow:
+              "inset 20px 20px 60px #bebebe, inset -20px -20px 60px #ffffff",
             paddingLeft: "30px",
           }}
           {...inputProps}

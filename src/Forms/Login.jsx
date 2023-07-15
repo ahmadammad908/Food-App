@@ -59,7 +59,11 @@ const Login = () => {
       <div>
         <div
           className="box"
-          style={{ width: "100%", background: "#ffff", height: "100vh" }}
+          style={{
+            width: "100%",
+            background: "#ffff",
+            minHeight: "100vh",
+          }}
         >
           <div
             className="container"
@@ -76,13 +80,28 @@ const Login = () => {
                 overflow: "hidden",
               }}
             >
-              <form className="form">
-                <div style={{ display: "flex", justifyContent: "center" }}>
+              <form
+                className="form"
+                style={{
+                  borderRadius: "20px",
+                  padding: "20px",
+                  background: "linear-gradient(145deg, #cacaca, #f0f0f0);",
+                  boxShadow:
+                    "inset 20px 20px 60px #bebebe, inset -20px -20px 60px #ffffff",
+                }}
+              >
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "center",
+                  }}
+                >
                   <h1
                     style={{
                       fontSize: "33px",
                       fontFamily: "sans-serif",
                       padding: "10px",
+                      color: "#FF3D00",
                     }}
                   >
                     Login
@@ -94,7 +113,7 @@ const Login = () => {
                       style={{
                         position: "absolute",
                         top: "50%",
-                        left: "20px",
+                        left: "21px",
                         color: "gray",
                         transform: "translateY(-50%)",
                       }}
@@ -102,12 +121,14 @@ const Login = () => {
                     <input
                       style={{
                         padding: "10px 40px",
-                        background: "#E9E9E9",
                         borderRadius: "50px",
                         margin: "10px",
                         outline: "none",
                         border: "none",
                         paddingLeft: "30px",
+                        background: "linear-gradient(145deg, #E9E9E9, #ffff);",
+                        boxShadow:
+                          "inset 20px 20px 60px #bebebe, inset -20px -20px 60px #ffffff",
                       }}
                       type={"email"}
                       name="email"
@@ -131,11 +152,13 @@ const Login = () => {
                     <input
                       style={{
                         padding: "10px 40px",
-                        background: "#E9E9E9",
                         borderRadius: "50px",
                         margin: "10px",
                         outline: "none",
                         border: "none",
+                        background: "linear-gradient(145deg, #E9E9E9, #ffff);",
+                        boxShadow:
+                          "inset 20px 20px 60px #bebebe, inset -20px -20px 60px #ffffff",
                         paddingLeft: "30px",
                       }}
                       type={"password"}

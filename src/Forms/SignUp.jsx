@@ -74,7 +74,7 @@ const SignUp = () => {
           updateProfile(user, {
             displayName: inputValues.email,
           });
-          navigate("/");
+          navigate("/login");
         })
         .catch((error) => {
           if (error.message == "Firebase: Error (auth/email-already-in-use).") {
@@ -119,13 +119,24 @@ const SignUp = () => {
               overflow: "hidden",
             }}
           >
-            <form className="form" style={{}}>
+            <form
+              className="form"
+              style={{
+                padding: "20px",
+                borderRadius: "20px",
+                background: "linear-gradient(145deg, #E9E9E9, #ffff);",
+                boxShadow:
+                  "inset 20px 20px 60px #bebebe, inset -20px -20px 60px #ffffff",
+                paddingLeft: "30px",
+              }}
+            >
               <div style={{ display: "flex", justifyContent: "center" }}>
                 <h1
                   style={{
                     fontSize: "33px",
                     fontFamily: "sans-serif",
                     padding: "10px",
+                    color: "#FF3D00",
                   }}
                 >
                   Sign Up

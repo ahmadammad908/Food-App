@@ -6,6 +6,7 @@ import Login from "./Forms/Login";
 import SignUp from "./Forms/SignUp";
 import Home from "./components/Home";
 import Main from "../src/main/Main";
+import Profile from "./components/Profile";
 import {
   BrowserRouter as Router,
   Route,
@@ -26,7 +27,9 @@ const App = () => {
     if (
       pathname === "/login" ||
       pathname === "/signup" ||
-      pathname === "/main"
+      pathname === "/main" ||
+      pathname === "/login1" ||
+      pathname === "/signup1"
     ) {
       return null;
     } else {
@@ -53,6 +56,7 @@ const App = () => {
           <Route path="/signup" element={<SignUp />} />
           <Route path="/signup1" element={<SignUp />} />
           <Route path="/cart" element={<Cart />} />
+          <Route path="/profile" element={<Profile />}></Route>
         </Routes>
         <HeaderConditional />
       </Router>

@@ -6,8 +6,8 @@ const Menulink = ({ text }) => {
   return (
     <>
       <div>
-        <h2>{text}</h2>
-        <span>
+        <h2 style={{ cursor: "pointer" }}>{text}</h2>
+        <span style={{ cursor: "pointer" }}>
           {""}
           {text === "Logout" && `( ${currentUser.displayName} )`}
         </span>
