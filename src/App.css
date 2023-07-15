@@ -18,3 +18,8 @@ input:invalid[focused = "true"] {
     color: red;
     display: none;
   }
+  .Scrool {
+    display: flex;
+    -webkit-overflow-scrolling: touch;
+  overflow-x: auto;
+  }

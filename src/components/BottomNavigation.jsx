@@ -16,7 +16,13 @@ const BottomNavigations = () => {
 
   return (
     <>
-      <div style={{ position: "fixed", bottom: 0, width: "100%" }}>
+      <div
+        style={{
+          position: "fixed",
+          bottom: 0,
+          width: "100%",
+        }}
+      >
         <BottomNavigation showLabels value={value} onChange={handleChange}>
           <BottomNavigationAction
             label="Recents"
