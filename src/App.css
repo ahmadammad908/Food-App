@@ -2,6 +2,9 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  
+}
+body {
 }
 
 input:invalid[focused = "true"] {
@@ -22,4 +25,8 @@ input:invalid[focused = "true"] {
     display: flex;
     -webkit-overflow-scrolling: touch;
   overflow-x: auto;
+  overflow: hidden;
+  
   }
+
+  

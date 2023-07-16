@@ -4,6 +4,7 @@ import useProducts from "../products/useProducts";
 import { useSelector } from "react-redux";
 import CategorieFilter from "../components/CategorieFilter";
 import SearchFilter from "../components/SearchFilter";
+import { Audio, Grid, InfinitySpin } from "react-loader-spinner";
 
 const Home = () => {
   const { getProducts, getBrushers } = useProducts();
@@ -61,125 +62,160 @@ const Home = () => {
     };
   }, []);
 
+  useEffect(() => {
+    const productContainer = productContainerRef.current;
+    const brusherContainer = brusherContainerRef.current;
+
+    productContainer.style.overflow = "scroll";
+    productContainer.style.scrollbarWidth = "none";
+    productContainer.style.msOverflowStyle = "none";
+    productContainer.style["&::-webkit-scrollbar"] = {
+      display: "none",
+    };
+
+    brusherContainer.style.overflow = "auto";
+    brusherContainer.style.scrollbarWidth = "none";
+    brusherContainer.style.msOverflowStyle = "none";
+    brusherContainer.style["&::-webkit-scrollbar"] = {
+      display: "none",
+    };
+  }, []);
+
+  const color = "#FF3D00";
+  const loading = products.length === 0;
+
   return (
-    <>
-      <div style={{ background: "#E9E9E9", minHeight: "100vh", width: "100%" }}>
+    <div style={{ background: "#ffff", width: "100%", height: "105vh" }}>
+      <div
+        style={{
+          height: "72px",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-around",
+          position: "sticky",
+          top: "0",
+          zIndex: "2",
+          background: "#ffff",
+        }}
+      >
         <div
           style={{
-            height: "72px",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-around",
+            background: "#FF3D00",
+            padding: "8px",
+            borderRadius: "10px",
           }}
         >
-          <div
-            style={{
-              background: "#FF3D00",
-              padding: "8px",
-              borderRadius: "10px",
-            }}
-          >
-            <FaBars style={{ color: "white" }} />
-          </div>
-          <h1
-            style={{
-              textAlign: "center",
-              letterSpacing: "1px",
-              lineHeight: "20px",
-              fontFamily: "'Pacifico', cursive",
-              color: "#FF3D00",
-            }}
-          >
-            Fast Taste
-          </h1>
-
-          <div
-            style={{
-              background: "#FF3D00",
-              padding: "8px",
-              borderRadius: "10px",
-            }}
-          >
-            <FaBell style={{ color: "white" }} />
-          </div>
+          <FaBars style={{ color: "white" }} />
         </div>
-
-        <SearchFilter />
-        <CategorieFilter
-          category={category}
-          onChangeCategory={(category) => setCategory(category)}
-        />
-
-        <div
-          ref={productContainerRef}
-          className="Scroll"
+        <h1
           style={{
-            overflowX: "scroll",
-            display: "flex",
-            flexWrap: "nowrap",
-            padding: "10px",
-            gap: "10px",
-            scrollbarWidth: "none",
-            msOverflowStyle: "none",
-            "&::-webkit-scrollbar": {
-              width: "0px",
-              background: "transparent",
-            },
+            textAlign: "center",
+            letterSpacing: "1px",
+            lineHeight: "20px",
+            fontFamily: "'Pacifico', cursive",
+            color: "#FF3D00",
           }}
         >
-          {products.map((product) => (
-            <div key={product.id} style={{ minWidth: "250px" }}>
-              <img
-                src={product.img}
-                width="250px"
-                height="150px"
-                style={{ borderRadius: "20px" }}
-                alt={product.name}
-              />
-              <div style={{ paddingTop: "10px" }}>
-                <h1 style={{ fontSize: "20px", fontFamily: "sans-serif" }}>
-                  {product.name}
-                </h1>
-              </div>
-              <div style={{ paddingTop: "10px" }}>
-                <h1 style={{ fontSize: "20px", fontFamily: "sans-serif" }}>
-                  Rs {product.price}
-                </h1>
-              </div>
-            </div>
-          ))}
-        </div>
-
+          Fast Taste
+        </h1>
         <div
-          ref={brusherContainerRef}
-          className="Scroll"
           style={{
-            overflowX: "scroll",
-            display: "flex",
-            flexWrap: "nowrap",
-            padding: "10px",
-            gap: "10px",
-            scrollbarWidth: "none",
-            msOverflowStyle: "none",
-            "&::-webkit-scrollbar": {
-              width: "0px",
-              background: "transparent",
-            },
+            background: "#FF3D00",
+            padding: "8px",
+            borderRadius: "10px",
           }}
         >
-          {brushers.map((brusher) => (
-            <div key={brusher.id} style={{ minWidth: "250px" }}>
-              <img
-                src={brusher.brush}
-                width="250px"
-                height="150px"
-                style={{ borderRadius: "20px" }}
-              />
-            </div>
-          ))}
+          <FaBell style={{ color: "white" }} />
         </div>
       </div>
-    </>
+
+      <SearchFilter />
+      <CategorieFilter
+        category={category}
+        onChangeCategory={(category) => setCategory(category)}
+      />
+
+      {loading && (
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            height: "50vh",
+          }}
+        >
+          <InfinitySpin width="200" color="#FF3D00" />
+        </div>
+      )}
+
+      <div
+        ref={productContainerRef}
+        className="Scroll"
+        style={{
+          overflowX: "scroll",
+          display: "flex",
+          overflow: "hidden",
+          flexWrap: "nowrap",
+          padding: "10px",
+          gap: "10px",
+          scrollbarWidth: "none",
+          msOverflowStyle: "none",
+          overflowY: "hidden",
+        }}
+      >
+        {products.map((product) => (
+          <div key={product.id} style={{ minWidth: "250px" }}>
+            <img
+              src={product.img}
+              width="250px"
+              height="150px"
+              style={{ borderRadius: "20px" }}
+              alt={product.name}
+            />
+            <div style={{ paddingTop: "10px" }}>
+              <h1 style={{ fontSize: "20px", fontFamily: "sans-serif" }}>
+                {product.name}
+              </h1>
+            </div>
+            <div style={{ paddingTop: "10px" }}>
+              <h1 style={{ fontSize: "20px", fontFamily: "sans-serif" }}>
+                Rs {product.price}
+              </h1>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div
+        ref={brusherContainerRef}
+        className="Scroll"
+        style={{
+          display: "flex",
+          flexWrap: "nowrap",
+          padding: "10px",
+          gap: "10px",
+          overflowX: "auto",
+          border: "none",
+          scrollbarWidth: "none",
+          msOverflowStyle: "none",
+        }}
+      >
+        {brushers.map((brusher) => (
+          <div key={brusher.id} style={{ minWidth: "250px" }}>
+            <img
+              src={brusher.brush}
+              width="250px"
+              height="100px"
+              style={{
+                borderRadius: "20px",
+                objectFit: "cover",
+              }}
+              alt=""
+            />
+          </div>
+        ))}
+      </div>
+    </div>
   );
 };
 

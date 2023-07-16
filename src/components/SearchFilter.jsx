@@ -1,7 +1,7 @@
 import React from "react";
 import { AiOutlineSearch } from "react-icons/ai";
 
-const SearchBar = () => {
+const SearchBar = ({ internalSearch, onChangeSearch }) => {
   return (
     <div
       style={{
@@ -15,6 +15,10 @@ const SearchBar = () => {
         <input
           type="text"
           placeholder="Search"
+          name="search"
+          id="search"
+          value={internalSearch}
+          onChange={(e) => onChangeSearch(e.target.value)}
           style={{
             padding: "10px",
             borderRadius: "20px",
