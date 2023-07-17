@@ -2,26 +2,21 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import useProducts from "../products/useProducts";
-import { Box, Tabs, Tab, createTheme, ThemeProvider } from "@mui/material";
-import { CircularProgress } from "@mui/material";
+import {
+  Box,
+  Tabs,
+  Tab,
+  createTheme,
+  ThemeProvider,
+  CircularProgress,
+} from "@mui/material";
 import { AddShoppingCart } from "@mui/icons-material";
 
 const theme = createTheme({
-  components: {
-    MuiTabs: {
-      styleOverrides: {
-        root: {
-          "& .Mui-selected": {
-            color: "#FF3D00", // Change the selected tab color here
-          },
-          "& .MuiTab-textColorPrimary.Mui-selected": {
-            color: "#FF3D00", // Change the selected tab color here
-          },
-        },
-        indicator: {
-          backgroundColor: "#FF3D00", // Change the indicator color here
-        },
-      },
+  palette: {
+    mode: "light", // Add this line to set the mode (light or dark)
+    primary: {
+      main: "#FF3D00",
     },
   },
 });
@@ -29,15 +24,7 @@ const theme = createTheme({
 function TabPanel({ value, index, children }) {
   return (
     <div role="tabpanel" hidden={value !== index}>
-      {value === index && (
-        <div
-          style={{
-            padding: "20px", // Add padding for the content
-          }}
-        >
-          {children}
-        </div>
-      )}
+      {value === index && <div style={{ padding: "20px" }}>{children}</div>}
     </div>
   );
 }
@@ -50,18 +37,16 @@ const ProductCard = () => {
   };
 
   const { getProducts } = useProducts();
-  const [category, setCategory] = useState("");
-
-  useEffect(() => {
-    getProducts({
-      category,
-    });
-  }, [category]);
-
   const { id } = useParams();
   const { products } = useSelector((state) => state.products);
   const product = products.find((product) => product.id === id);
   const loading = products.length === 0;
+
+  useEffect(() => {
+    getProducts({
+      category: "",
+    });
+  }, []);
 
   if (!product) {
     return (
@@ -73,25 +58,16 @@ const ProductCard = () => {
           height: "100vh",
         }}
       >
-        {loading && <CircularProgress color="#FF3D00" />}
+        {loading && <CircularProgress style={{ color: "#FF3D00" }} />}
       </div>
     );
   }
 
   return (
     <ThemeProvider theme={theme}>
-      <div
-        style={{
-          maxWidth: "400px",
-          margin: "0 auto",
-        }}
-      >
+      <div style={{ maxWidth: "400px", margin: "0 auto" }}>
         <div
-          style={{
-            borderRadius: "8px",
-            padding: "20px",
-            marginBottom: "20px",
-          }}
+          style={{ borderRadius: "8px", padding: "20px", marginBottom: "20px" }}
         >
           <img
             src={product.img}
@@ -112,7 +88,7 @@ const ProductCard = () => {
             color: "#FF3D00",
             fontFamily: "'Pacifico', cursive",
             fontSize: "30px",
-            marginBottom: "20px",
+            marginTop: "-20px",
           }}
         >
           {product.name}
@@ -122,14 +98,14 @@ const ProductCard = () => {
             <Tabs
               value={value}
               onChange={handleChange}
-              aria-label="basic tabs example"
+              aria-label="Product Tabs"
               centered
             >
               <Tab label="Description" />
               <Tab label="Ingredients" />
               <Tab label="Instructions" />
             </Tabs>
-            <div style={{ marginTop: "20px" }}>
+            <div style={{ marginTop: "0px" }}>
               <TabPanel value={value} index={0}>
                 {product.des}
               </TabPanel>
