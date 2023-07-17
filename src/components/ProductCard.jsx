@@ -2,8 +2,9 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import useProducts from "../products/useProducts";
-import { Audio, Grid, InfinitySpin } from "react-loader-spinner";
 import { Box, Tabs, Tab, createTheme, ThemeProvider } from "@mui/material";
+import { CircularProgress } from "@mui/material";
+import { AddShoppingCart } from "@mui/icons-material";
 
 const theme = createTheme({
   components: {
@@ -31,10 +32,6 @@ function TabPanel({ value, index, children }) {
       {value === index && (
         <div
           style={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            height: "200px", // Set the desired height for the tab panel
             padding: "20px", // Add padding for the content
           }}
         >
@@ -76,107 +73,94 @@ const ProductCard = () => {
           height: "100vh",
         }}
       >
-        {loading && (
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-          >
-            <InfinitySpin color="#FF3D00" />
-          </div>
-        )}
+        {loading && <CircularProgress color="#FF3D00" />}
       </div>
     );
   }
 
   return (
-    <>
-      <ThemeProvider theme={theme}>
-        <div style={{ width: "400px", margin: "0 auto" }}>
-          <div
-            style={{
-              width: "100%",
-              borderRadius: "8px",
-              padding: "20px",
-            }}
-          >
-            <img
-              src={product.img}
-              alt={product.name}
-              style={{
-                width: "100%",
-                height: "auto",
-                maxHeight: "200px",
-                objectFit: "cover",
-                borderRadius: "8px",
-              }}
-            />
-          </div>
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              paddingTop: "20px",
-              color: "",
-            }}
-          >
-            <h1
-              style={{
-                color: "#FF3D00",
-                fontFamily: "'Pacifico', cursive",
-                fontSize: "30px",
-              }}
-            >
-              {product.name}
-            </h1>
-          </div>
-          <div style={{ display: "flex", justifyContent: "center" }}>
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "center",
-              }}
-            >
-              <Box sx={{}}>
-                <Tabs
-                  value={value}
-                  onChange={handleChange}
-                  aria-label="basic tabs example"
-                >
-                  <Tab label="Description" />
-                  <Tab label="Ingredients" />
-                  <Tab label="Item Three" />
-                </Tabs>
-                <div style={{}}>
-                  <TabPanel value={value} index={0}>
-                    {product.des}
-                  </TabPanel>
-                  <TabPanel value={value} index={1}></TabPanel>
-                  <TabPanel value={value} index={2}>
-                    Instructions
-                  </TabPanel>
-                </div>
-              </Box>
-            </div>
-          </div>
-        </div>
-      </ThemeProvider>
-      <div style={{ display: "flex", justifyContent: "center" }}>
-        <button
+    <ThemeProvider theme={theme}>
+      <div
+        style={{
+          maxWidth: "400px",
+          margin: "0 auto",
+        }}
+      >
+        <div
           style={{
-            padding: "8px 40px",
-            border: "none",
-            borderRadius: "10px",
-            background: "#FF3D00",
-            color: "white",
+            borderRadius: "8px",
+            padding: "20px",
+            marginBottom: "20px",
           }}
         >
-          Add to Cart
-        </button>
+          <img
+            src={product.img}
+            alt={product.name}
+            style={{
+              width: "100%",
+              height: "auto",
+              maxHeight: "400px",
+              objectFit: "cover",
+              borderRadius: "8px",
+            }}
+          />
+        </div>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            color: "#FF3D00",
+            fontFamily: "'Pacifico', cursive",
+            fontSize: "30px",
+            marginBottom: "20px",
+          }}
+        >
+          {product.name}
+        </div>
+        <div style={{ display: "flex", justifyContent: "center" }}>
+          <Box sx={{ width: "100%" }}>
+            <Tabs
+              value={value}
+              onChange={handleChange}
+              aria-label="basic tabs example"
+              centered
+            >
+              <Tab label="Description" />
+              <Tab label="Ingredients" />
+              <Tab label="Instructions" />
+            </Tabs>
+            <div style={{ marginTop: "20px" }}>
+              <TabPanel value={value} index={0}>
+                {product.des}
+              </TabPanel>
+              <TabPanel value={value} index={1}>
+                {product.ingredients}
+              </TabPanel>
+              <TabPanel value={value} index={2}>
+                {product.instructions}
+              </TabPanel>
+            </div>
+          </Box>
+        </div>
+        <div style={{ display: "flex", justifyContent: "center" }}>
+          <button
+            style={{
+              padding: "8px 40px",
+              border: "none",
+              borderRadius: "10px",
+              background: "#FF3D00",
+              color: "white",
+              display: "flex",
+              alignItems: "center",
+              gap: "5px",
+            }}
+          >
+            <AddShoppingCart />
+            Add to Cart
+          </button>
+        </div>
       </div>
-    </>
+    </ThemeProvider>
   );
 };
 
