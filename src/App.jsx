@@ -7,6 +7,7 @@ import SignUp from "./Forms/SignUp";
 import Home from "./components/Home";
 import Main from "../src/main/Main";
 import Profile from "./components/Profile";
+import ProductCard from "./components/ProductCard";
 import {
   BrowserRouter as Router,
   Route,
@@ -57,6 +58,7 @@ const App = () => {
           <Route path="/signup1" element={<SignUp />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/profile" element={<Profile />}></Route>
+          <Route path="/product/:id" element={<ProductCard />}></Route>
         </Routes>
         <HeaderConditional />
       </Router>

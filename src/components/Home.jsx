@@ -4,6 +4,7 @@ import useProducts from "../products/useProducts";
 import { useSelector } from "react-redux";
 import CategorieFilter from "../components/CategorieFilter";
 import SearchFilter from "../components/SearchFilter";
+import { Link } from "react-router-dom";
 import { Audio, Grid, InfinitySpin } from "react-loader-spinner";
 
 const Home = () => {
@@ -164,25 +165,32 @@ const Home = () => {
         }}
       >
         {products.map((product) => (
-          <div key={product.id} style={{ minWidth: "250px" }}>
-            <img
-              src={product.img}
-              width="250px"
-              height="150px"
-              style={{ borderRadius: "20px" }}
-              alt={product.name}
-            />
-            <div style={{ paddingTop: "10px" }}>
-              <h1 style={{ fontSize: "20px", fontFamily: "sans-serif" }}>
-                {product.name}
-              </h1>
-            </div>
-            <div style={{ paddingTop: "10px" }}>
-              <h1 style={{ fontSize: "20px", fontFamily: "sans-serif" }}>
-                Rs {product.price}
-              </h1>
-            </div>
-          </div>
+          <>
+            <Link
+              to={`/product/${product.id}`}
+              style={{ textDecoration: "none", color: "black" }}
+            >
+              <div key={product.id} style={{ minWidth: "250px" }}>
+                <img
+                  src={product.img}
+                  width="250px"
+                  height="150px"
+                  style={{ borderRadius: "20px" }}
+                  alt={product.name}
+                />
+                <div style={{ paddingTop: "10px" }}>
+                  <h1 style={{ fontSize: "20px", fontFamily: "sans-serif" }}>
+                    {product.name}
+                  </h1>
+                </div>
+                <div style={{ paddingTop: "10px" }}>
+                  <h1 style={{ fontSize: "20px", fontFamily: "sans-serif" }}>
+                    Rs {product.price}
+                  </h1>
+                </div>
+              </div>
+            </Link>
+          </>
         ))}
       </div>
 
